@@ -13,7 +13,7 @@ const gendiff = program
 .argument('<filepath1>')
 .argument('<filepath2>')
 .action((a, b, options) => {
-    app(a, b)
+    console.log(app(a, b))
 })
 
 program.parse()
