@@ -26,20 +26,3 @@ export default (filepath1, filepath2) => {
   }, [])
   return `{\n${structured.join('\n')}\n}`
 }
-
-//   for (const key of bothContentKeys) {
-//     if (Object.hasOwn(content1, key) && Object.hasOwn(content2, key) && content1[key] === content2[key]) {
-//       result.push(`  ${key}: ${content1[key]}`)
-//     }
-//     else if (Object.hasOwn(content1, key) && !Object.hasOwn(content2, key)) {
-//       result.push(`- ${key}: ${content1[key]}`)
-//     }
-//     else if (Object.hasOwn(content2, key) && !Object.hasOwn(content1, key)) {
-//       result.push(`+ ${key}: ${content2[key]}`)
-//     }
-//     else if (Object.hasOwn(content1, key) && Object.hasOwn(content2, key) && content1[key] !== content2[key]) {
-//       result.push(`- ${key}: ${content1[key]}\n+ ${key}: ${content2[key]}`)
-//     }
-//   }
-//   return `{\n${result.join('\n')}\n}`
-// }
