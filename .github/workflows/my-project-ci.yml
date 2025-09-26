@@ -21,7 +21,7 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npx eslint .
-  SonarQube Scan:
+  Sonarqube:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v4
@@ -34,4 +34,5 @@ jobs:
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
