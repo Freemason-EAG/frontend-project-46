@@ -31,7 +31,7 @@ jobs:
           node-version: '18' 
           cache: 'npm'
       - run: npm ci
-      - run: npm test -- --coverage
+      - run: npm run test:coverage
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6.0.0
         env:
