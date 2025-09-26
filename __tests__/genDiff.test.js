@@ -1,10 +1,14 @@
 import genDiff from '../src/index.js'
+import { fileURLToPath } from 'url'
+import path from 'path'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 let firstJsonFile
 let secondJsonFile
 beforeEach(() => {
-  firstJsonFile = '__fixtures__/file1.json'
-  secondJsonFile = '__fixtures__/file2.json'
+  firstJsonFile = path.join(__dirname, '..', '__fixtures__/file1.json')
+  secondJsonFile = path.join(__dirname, '..', '__fixtures__/file2.json')
 })
 
 test('genDiff', () => {
@@ -25,5 +29,6 @@ test('type of result to be string', () => {
 })
 
 test('transferred an empty file', () => {
-  expect(() => genDiff('__fixtures__/emptyFile.json', secondJsonFile)).toThrow('empty file transferred')
+  const emptyFile = path.join(__dirname, '..', '__fixtures__/emptyFile.json')
+  expect(() => genDiff(emptyFile, secondJsonFile)).toThrow('empty file transferred')
 })
