@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from "commander"
-import app from '../src/index.js'
+import genDiff from '../src/index.js'
 
 const program = new Command()
 
@@ -13,7 +13,7 @@ const gendiff = program
 .argument('<filepath1>')
 .argument('<filepath2>')
 .action((a, b, options) => {
-    console.log(app(a, b))
+    console.log(genDiff(a, b))
 })
 
 program.parse()

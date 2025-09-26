@@ -3,12 +3,18 @@ import fs from 'fs'
 import _ from 'lodash'
 import parser from './parser.js'
 
-export default (filepath1, filepath2) => {
+const genDiff = (filepath1, filepath2) => {
   const path1 = path.resolve(filepath1)
   const path2 = path.resolve(filepath2)
-
-  const content1 = parser(fs.readFileSync(path1, 'utf-8'), filepath1)
-  const content2 = parser(fs.readFileSync(path2, 'utf-8'), filepath2)
+  let content1
+  let content2
+  try {
+    content1 = parser(fs.readFileSync(path1, 'utf-8'), filepath1)
+    content2 = parser(fs.readFileSync(path2, 'utf-8'), filepath2)
+  }
+  catch (error) {
+    throw new Error('empty file transferred')
+  }
 
   const bothContentKeys = _.sortBy(_.union(Object.keys(content1), Object.keys(content2)))
 
@@ -26,3 +32,5 @@ export default (filepath1, filepath2) => {
   }, [])
   return `{\n${structured.join('\n')}\n}`
 }
+
+export default genDiff
