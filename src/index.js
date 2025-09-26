@@ -12,7 +12,7 @@ const genDiff = (filepath1, filepath2) => {
     content1 = parser(fs.readFileSync(path1, 'utf-8'), filepath1)
     content2 = parser(fs.readFileSync(path2, 'utf-8'), filepath2)
   }
-  catch (error) {
+  catch {
     throw new Error('empty file transferred')
   }
 
