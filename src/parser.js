@@ -1,7 +1,7 @@
-import path from 'path'
+import path from 'node:path'
 import yaml from 'js-yaml'
 
-export default (data, filename) => {
+const parser = (data, filename) => {
   const format = path.extname(filename).toLowerCase()
   if (format === '.json') return JSON.parse(data)
   if (format === '.yaml' || format === '.yml') return yaml.load(data)
@@ -9,3 +9,5 @@ export default (data, filename) => {
     throw new Error(`${format} is wrong format`)
   }
 }
+
+export default parser
