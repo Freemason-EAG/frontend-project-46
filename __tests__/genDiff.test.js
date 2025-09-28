@@ -40,7 +40,7 @@ describe('genDiff for YML', () => {
   let secondYmlFile
   beforeEach(() => {
     firstYmlFile = path.join(__dirname, '..', '__fixtures__/file1.yml')
-    secondYmlFile = path.join(__dirname, '..', '__fixtures__/file2.yml')
+    secondYmlFile = path.join(__dirname, '..', '__fixtures__/file2.yaml')
   })
 
   test('genDiff', () => {
