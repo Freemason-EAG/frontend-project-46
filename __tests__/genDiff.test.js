@@ -4,7 +4,7 @@ import path from 'path'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-describe('genDiff for JSON', () => {
+describe('genDiff: JSON nested structure test', () => {
   let firstJsonFile
   let secondJsonFile
   beforeEach(() => {
@@ -15,12 +15,48 @@ describe('genDiff for JSON', () => {
   test('genDiff', () => {
     expect(genDiff(firstJsonFile, secondJsonFile)).toEqual(
       `{
-- follow: false
-  host: hexlet.io
-- proxy: 123.234.53.22
-- timeout: 50
-+ timeout: 20
-+ verbose: true
+    common: {
+      + follow: false
+        setting1: Value 1
+      - setting2: 200
+      - setting3: true
+      + setting3: null
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
+        setting6: {
+            doge: {
+              - wow:
+              + wow: so much
+            }
+            key: value
+          + ops: vops
+        }
+    }
+    group1: {
+      - baz: bas
+      + baz: bars
+        foo: bar
+      - nest: {
+            key: value
+        }
+      + nest: str
+    }
+  - group2: {
+        abc: 12345
+        deep: {
+            id: 45
+        }
+    }
+  + group3: {
+        deep: {
+            id: {
+                number: 45
+            }
+        }
+        fee: 100500
+    }
 }`,
     )
   })
@@ -35,7 +71,7 @@ describe('genDiff for JSON', () => {
   })
 })
 
-describe('genDiff for YML', () => {
+describe('genDiff: JSON nested structure test', () => {
   let firstYmlFile
   let secondYmlFile
   beforeEach(() => {
@@ -46,12 +82,48 @@ describe('genDiff for YML', () => {
   test('genDiff', () => {
     expect(genDiff(firstYmlFile, secondYmlFile)).toEqual(
       `{
-- follow: false
-  host: hexlet.io
-- proxy: 123.234.53.22
-- timeout: 50
-+ timeout: 20
-+ verbose: true
+    common: {
+      + follow: false
+        setting1: Value 1
+      - setting2: 200
+      - setting3: true
+      + setting3: null
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
+        setting6: {
+            doge: {
+              - wow:
+              + wow: so much
+            }
+            key: value
+          + ops: vops
+        }
+    }
+    group1: {
+      - baz: bas
+      + baz: bars
+        foo: bar
+      - nest: {
+            key: value
+        }
+      + nest: str
+    }
+  - group2: {
+        abc: 12345
+        deep: {
+            id: 45
+        }
+    }
+  + group3: {
+        deep: {
+            id: {
+                number: 45
+            }
+        }
+        fee: 100500
+    }
 }`,
     )
   })
