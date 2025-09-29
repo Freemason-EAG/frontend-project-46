@@ -6,7 +6,11 @@
 
 ### ▶️ Demo 
 
-<div style="display: flex; gap: 10px;">
+| Comparing Two JSON Files | Comparing Two YAML Files |
+|-------------------------|-------------------------|
+| [![JSON Demo](https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q.png)](https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q) | [![YAML Demo](https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ.png)](https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ) |
+
+<!-- <div style="display: flex; gap: 10px;">
 <div>
     <h4>Comparing Two JSON Files</h4>
     <a href="https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q">
@@ -19,7 +23,7 @@
       <img src="https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ.png" width="300" height="500" alt="YAML Demo">
     </a>
   </div>
-</div>
+</div> -->
 
 <!-- #### Comparing Two JSON Files
 <a href="https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q">
