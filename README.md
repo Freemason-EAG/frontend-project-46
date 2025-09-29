@@ -8,7 +8,7 @@
 
 | Comparing Two JSON Files | Comparing Two YAML Files |
 |-------------------------|-------------------------|
-| <a href="https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q"><img src="https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q.png" height="300" alt="Demo: Comparing Two JSON Files"></a> | <a href="https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ"><img src="https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ.png" height="300" alt="Demo: Comparing Two YAML Files"></a> |
+| <a href="https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q"><img src="https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q.png" width="300" height="500" alt="Demo: Comparing Two JSON Files"></a> | <a href="https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ"><img src="https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ.png" width="300" height="500" alt="Demo: Comparing Two YAML Files"></a> |
 
 <!-- <div style="display: flex; gap: 10px;">
 <div>
