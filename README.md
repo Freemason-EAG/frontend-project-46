@@ -7,6 +7,13 @@
 ### ▶️ Demo 
 
 #### Comparing Two JSON Files
+[![asciinema demo](https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q.png)](https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q)
+
+#### Comparing Two YAML Files
+[![asciinema demo](https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ.png)](https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ)
+
+
+<!-- #### Comparing Two JSON Files
 <a href="https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q">
     <img src="https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q.png" width="300" alt="Demo: Comparing Two JSON Files">
 </a>
@@ -14,7 +21,7 @@
 #### Comparing Two YAML Files
 <a href="https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ">
     <img src="https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ.png" width="300" alt="Demo: Comparing Two YAML Files">
-</a>
+</a> -->
 
 
 
@@ -26,9 +33,5 @@
 
 
 
-<!-- #### Comparing Two JSON Files
-[![asciinema demo](https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q.png)](https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q)
 
-#### Comparing Two YAML Files
-[![asciinema demo](https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ.png)](https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ) -->
 
