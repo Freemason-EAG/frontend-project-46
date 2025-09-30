@@ -5,10 +5,16 @@ import parser from './parser.js'
 
 const isPrimitiveData = data => data === null || typeof (data) === 'string' || typeof (data) === 'boolean' || typeof (data) === 'number'
 
-const getInterRepresentation = (obj1, obj2, arrKeys) => {
+const getAST = (obj1, obj2, arrKeys) => {
   return arrKeys.map((key) => {
     if (Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
-      return obj1[key] === obj2[key] ? { key, status: 'unchanged', value: obj1[key] } : { key, status: 'changed', value1: obj1[key], value2: obj2[key] }
+      if (typeof (obj1[key]) === 'object' && typeof (obj2[key]) === 'object') {
+        const bothContentKeys = _.sortBy(_.union(Object.keys(obj1[key]), Object.keys(obj2[key])))
+        return { key, status: 'recursion', children: getAST(obj1[key], obj2[key], bothContentKeys) }
+      }
+      else if ((obj1[key] === obj2[key])) return { key, status: 'unchanged', value: obj1[key] }
+
+      else return { key, status: 'changed', value1: obj1[key], value2: obj2[key] }
     }
     else if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) {
       return { key, status: 'deleted', value: obj1[key] }
@@ -20,48 +26,34 @@ const getInterRepresentation = (obj1, obj2, arrKeys) => {
   })
 }
 
-// Вариант 2 функции getInterRepresentation
-// const getInterRepresentation = (obj1, obj2, arrKeys) => {
-//   return arrKeys.map((key) => {
-//     if (Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
-//       if (obj1[key] !== obj2[key]) return { key, status: 'changed', value1: obj1[key], value2: obj2[key] }
-//       if (obj1[key] === obj2[key]) {
-//         if (typeof (obj1[key]) === 'object' && typeof (obj2[key]) === 'object') {
-//           const bothContentKeys = _.sortBy(_.union(Object.keys(obj1[key]), Object.keys(obj2[key])))
-//           return getInterRepresentation(obj1[key], obj2[key], bothContentKeys)
-//         }
-//         else return { key, status: 'unchanged', value: obj1[key] }
-//       }
-//     }
-//     else if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) {
-//       return { key, status: 'deleted', value: obj1[key] }
-//     }
-//     else if (Object.hasOwn(obj2, key) && !Object.hasOwn(obj1, key)) {
-//       return { key, status: 'added', value: obj2[key] }
-//     }
-//     return null
-//   })
-// }
+const stringify = (value, depth = 0) => {
+  if (isPrimitiveData(value)) return String(value)
+  const replacer = ' '
+  const spacesCount = 4
+  const spaces = replacer.repeat(spacesCount * depth)
+  const nextSpace = replacer.repeat(spacesCount * (depth + 1))
+  const result = Object.entries(value)
+  const newResult = result.map(([key, val]) => `${nextSpace}${key}: ${stringify(val, depth + 1)}`)
+  return `{\n${newResult.join('\n')}\n${spaces}}`
+}
 
-const formatter = (obj1, obj2, arrKeys) => {
-  const iter = (obj1, obj2, depth) => {
-    const keysWithStatus = getInterRepresentation(obj1, obj2, arrKeys)
-    const result = keysWithStatus.flatMap((obj) => {
-      if (isPrimitiveData(obj.value)) {
-        if (obj.status === 'unchanged') return `  ${obj.key}: ${obj.value}`
-        else if (obj.status === 'deleted') return `- ${obj.key}: ${obj.value}`
-        else if (obj.status === 'added') return `+ ${obj.key}: ${obj.value}`
-      }
-      else if (obj.status === 'changed') {
-        if (typeof (obj.value1) === 'object' && typeof (obj.value2) === 'object') {
-          return iter(obj.value1, obj.value2, depth + 1)
-        }
-        else return `- ${obj.key}: ${obj.value1}\n+ ${obj.key}: ${obj.value2}`
+const formatter = (arrOfObjs) => {
+  const iter = (objs, depth = 0) => {
+    const replacer = ' '
+    const spacesCount = 4
+    const spaces = replacer.repeat(spacesCount * depth)
+    const nextSpace = replacer.repeat(spacesCount * (depth + 1) - 2)
+    return objs.flatMap((obj) => {
+      if (obj.status === 'added') return `${nextSpace}+ ${obj.key}: ${stringify(obj.value, depth + 1)}`
+      if (obj.status === 'deleted') return `${nextSpace}- ${obj.key}: ${stringify(obj.value, depth + 1)}`
+      if (obj.status === 'changed') return [`${nextSpace}- ${obj.key}: ${stringify(obj.value1, depth + 1)}`, `${nextSpace}+ ${obj.key}: ${stringify(obj.value2, depth + 1)}`]
+      if (obj.status === 'unchanged') return `${nextSpace}  ${obj.key}: ${stringify(obj.value, depth + 1)}`
+      if (obj.status === 'recursion') {
+        return [`${nextSpace}  ${obj.key}: {`, ...iter (obj.children, depth + 1), `${nextSpace}  }`]
       }
     })
-    return result
   }
-  return iter(obj1, obj2, 0)
+  return iter(arrOfObjs, 0)
 }
 
 const genDiff = (filepath1, filepath2) => {
@@ -78,8 +70,9 @@ const genDiff = (filepath1, filepath2) => {
   const content2 = parser(data2, filepath2)
 
   const bothContentKeys = _.sortBy(_.union(Object.keys(content1), Object.keys(content2)))
+  const convertToAst = getAST(content1, content2, bothContentKeys)
 
-  const structured = formatter(content1, content2, bothContentKeys)
+  const structured = formatter(convertToAst)
   return `{\n${structured.join('\n')}\n}`
 }
 
