@@ -2,12 +2,8 @@ import path from 'node:path'
 import fs from 'node:fs'
 import _ from 'lodash'
 import parser from './parser.js'
-
-const isPrimitiveData = data => data === null || typeof (data) === 'string' || typeof (data) === 'boolean' || typeof (data) === 'number'
-
-const makeIndent = (depth, leftShift = 0, spacesCount = 4, replacer = ' ') => {
-  return replacer.repeat(spacesCount * depth - leftShift)
-}
+import formatter from './formatters/stylish.js'
+import stylish from './formatters/stylish.js'
 
 const getAST = (obj1, obj2, arrKeys) => {
   return arrKeys.map((key) => {
@@ -34,32 +30,7 @@ const getAST = (obj1, obj2, arrKeys) => {
   })
 }
 
-const stringify = (value, depth = 0) => {
-  if (isPrimitiveData(value)) return String(value)
-  const spaces = makeIndent(depth)
-  const nextSpace = makeIndent(depth + 1)
-  const result = Object.entries(value)
-  const newResult = result.map(([key, val]) => `${nextSpace}${key}: ${stringify(val, depth + 1)}`)
-  return `{\n${newResult.join('\n')}\n${spaces}}`
-}
-
-const formatter = (arrOfObjs) => {
-  const iter = (objs, depth = 0) => {
-    const nextSpace = makeIndent(depth + 1, 2)
-    return objs.flatMap((obj) => {
-      if (obj.status === 'added') return `${nextSpace}+ ${obj.key}: ${stringify(obj.value, depth + 1)}`
-      if (obj.status === 'deleted') return `${nextSpace}- ${obj.key}: ${stringify(obj.value, depth + 1)}`
-      if (obj.status === 'changed') return [`${nextSpace}- ${obj.key}: ${stringify(obj.value1, depth + 1)}`, `${nextSpace}+ ${obj.key}: ${stringify(obj.value2, depth + 1)}`]
-      if (obj.status === 'unchanged') return `${nextSpace}  ${obj.key}: ${stringify(obj.value, depth + 1)}`
-      if (obj.status === 'recursion') {
-        return [`${nextSpace}  ${obj.key}: {`, ...iter (obj.children, depth + 1), `${nextSpace}  }`]
-      }
-    })
-  }
-  return iter(arrOfObjs, 0)
-}
-
-const genDiff = (filepath1, filepath2) => {
+const genDiff = (filepath1, filepath2, format = stylish) => {
   const path1 = path.resolve(filepath1)
   const path2 = path.resolve(filepath2)
 
@@ -75,7 +46,7 @@ const genDiff = (filepath1, filepath2) => {
   const bothContentKeys = _.sortBy(_.union(Object.keys(content1), Object.keys(content2)))
   const convertToAst = getAST(content1, content2, bothContentKeys)
 
-  const structured = formatter(convertToAst)
+  const structured = format(convertToAst)
   return `{\n${structured.join('\n')}\n}`
 }
 
