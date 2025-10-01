@@ -12,6 +12,10 @@
 #### Comparing Two YAML Files 
 [▶️ Watch Demo](https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ)
 
+#### Recursive file diff
+[▶️ Watch Demo](https://asciinema.org/a/D2CueuI9GO5wB5wx4pIbizmw0)
+
+
 
 <!-- #### Comparing Two JSON Files
 <a href="https://asciinema.org/a/mGebINwCBop2DlN5F04NH0b5Q">
@@ -21,7 +25,9 @@
 #### Comparing Two YAML Files
 <a href="https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ">
     <img src="https://asciinema.org/a/cIB4kiMWPfTkV9EYP1xeKg4rJ.png" width="300" alt="Demo: Comparing Two YAML Files">
-</a> -->
+</a>
+
+
 
 
 
