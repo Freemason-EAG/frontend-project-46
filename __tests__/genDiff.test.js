@@ -27,7 +27,7 @@ describe('genDiff: JSON nested structure test', () => {
         }
         setting6: {
             doge: {
-              - wow:
+              - wow: 
               + wow: so much
             }
             key: value
@@ -94,7 +94,7 @@ describe('genDiff: JSON nested structure test', () => {
         }
         setting6: {
             doge: {
-              - wow:
+              - wow: 
               + wow: so much
             }
             key: value

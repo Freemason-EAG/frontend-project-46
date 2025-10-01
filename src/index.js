@@ -5,22 +5,30 @@ import parser from './parser.js'
 
 const isPrimitiveData = data => data === null || typeof (data) === 'string' || typeof (data) === 'boolean' || typeof (data) === 'number'
 
+const makeIndent = (depth, leftShift = 0, spacesCount = 4, replacer = ' ') => {
+  return replacer.repeat(spacesCount * depth - leftShift)
+}
+
 const getAST = (obj1, obj2, arrKeys) => {
   return arrKeys.map((key) => {
-    if (Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
-      if (typeof (obj1[key]) === 'object' && typeof (obj2[key]) === 'object') {
-        const bothContentKeys = _.sortBy(_.union(Object.keys(obj1[key]), Object.keys(obj2[key])))
-        return { key, status: 'recursion', children: getAST(obj1[key], obj2[key], bothContentKeys) }
+    const inFirstObj = Object.hasOwn(obj1, key)
+    const inSecondObj = Object.hasOwn(obj2, key)
+    const val1 = obj1[key]
+    const val2 = obj2[key]
+    if (inFirstObj && inSecondObj) {
+      if (typeof (val1) === 'object' && typeof (val2) === 'object') {
+        const bothContentKeys = _.sortBy(_.union(Object.keys(val1), Object.keys(val2)))
+        return { key, status: 'recursion', children: getAST(val1, val2, bothContentKeys) }
       }
-      else if ((obj1[key] === obj2[key])) return { key, status: 'unchanged', value: obj1[key] }
+      else if ((val1 === val2)) return { key, status: 'unchanged', value: val1 }
 
-      else return { key, status: 'changed', value1: obj1[key], value2: obj2[key] }
+      else return { key, status: 'changed', value1: val1, value2: val2 }
     }
-    else if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) {
-      return { key, status: 'deleted', value: obj1[key] }
+    else if (inFirstObj && !inSecondObj) {
+      return { key, status: 'deleted', value: val1 }
     }
-    else if (Object.hasOwn(obj2, key) && !Object.hasOwn(obj1, key)) {
-      return { key, status: 'added', value: obj2[key] }
+    else if (inSecondObj && !inFirstObj) {
+      return { key, status: 'added', value: val2 }
     }
     return null
   })
@@ -28,10 +36,8 @@ const getAST = (obj1, obj2, arrKeys) => {
 
 const stringify = (value, depth = 0) => {
   if (isPrimitiveData(value)) return String(value)
-  const replacer = ' '
-  const spacesCount = 4
-  const spaces = replacer.repeat(spacesCount * depth)
-  const nextSpace = replacer.repeat(spacesCount * (depth + 1))
+  const spaces = makeIndent(depth)
+  const nextSpace = makeIndent(depth + 1)
   const result = Object.entries(value)
   const newResult = result.map(([key, val]) => `${nextSpace}${key}: ${stringify(val, depth + 1)}`)
   return `{\n${newResult.join('\n')}\n${spaces}}`
@@ -39,10 +45,7 @@ const stringify = (value, depth = 0) => {
 
 const formatter = (arrOfObjs) => {
   const iter = (objs, depth = 0) => {
-    const replacer = ' '
-    const spacesCount = 4
-    const spaces = replacer.repeat(spacesCount * depth)
-    const nextSpace = replacer.repeat(spacesCount * (depth + 1) - 2)
+    const nextSpace = makeIndent(depth + 1, 2)
     return objs.flatMap((obj) => {
       if (obj.status === 'added') return `${nextSpace}+ ${obj.key}: ${stringify(obj.value, depth + 1)}`
       if (obj.status === 'deleted') return `${nextSpace}- ${obj.key}: ${stringify(obj.value, depth + 1)}`
