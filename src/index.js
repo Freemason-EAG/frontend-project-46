@@ -2,7 +2,6 @@ import path from 'node:path'
 import fs from 'node:fs'
 import _ from 'lodash'
 import parser from './parser.js'
-import formatter from './formatters/stylish.js'
 import stylish from './formatters/stylish.js'
 
 const getAST = (obj1, obj2, arrKeys) => {
