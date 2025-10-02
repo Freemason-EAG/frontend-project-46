@@ -18,6 +18,9 @@
 #### Flat format output
 [▶️ Watch Demo](https://asciinema.org/a/GPIKZPVH5Fk2rJ2tdAw3wpTNZ)
 
+#### JSON format output
+[▶️ Watch Demo](https://asciinema.org/a/AcNJW4CO3fQFROx8N2TCZ5EpX)
+
 
 
 <!-- #### Comparing Two JSON Files
