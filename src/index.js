@@ -46,7 +46,7 @@ const genDiff = (filepath1, filepath2, format = stylish) => {
   const convertToAst = getAST(content1, content2, bothContentKeys)
 
   const structured = format(convertToAst)
-  return `{\n${structured.join('\n')}\n}`
+  return structured
 }
 
 export default genDiff

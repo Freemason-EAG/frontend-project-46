@@ -22,7 +22,7 @@ const stylish = (arrOfObjs) => {
       }
     })
   }
-  return iter(arrOfObjs, 0)
+  return `{\n${iter(arrOfObjs, 0).join('\n')}\n}`
 }
 
 export default stylish

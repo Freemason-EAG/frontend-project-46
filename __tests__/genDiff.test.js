@@ -1,6 +1,7 @@
 import genDiff from '../src/index.js'
 import { fileURLToPath } from 'url'
 import path from 'path'
+import plain from '../src/formatters/plain.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -147,7 +148,7 @@ describe('genDiff: Plain format check', () => {
   })
 
   test('genDiff', () => {
-    expect(genDiff(firstJsonFile, secondJsonFile, 'plain')).toEqual(
+    expect(genDiff(firstJsonFile, secondJsonFile, plain)).toEqual(
       `Property 'common.follow' was added with value: false
 Property 'common.setting2' was removed
 Property 'common.setting3' was updated. From true to null

@@ -15,6 +15,9 @@
 #### Recursive file diff
 [▶️ Watch Demo](https://asciinema.org/a/D2CueuI9GO5wB5wx4pIbizmw0)
 
+#### Flat format output
+[▶️ Watch Demo](https://asciinema.org/a/GPIKZPVH5Fk2rJ2tdAw3wpTNZ)
+
 
 
 <!-- #### Comparing Two JSON Files
