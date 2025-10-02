@@ -4,8 +4,9 @@ import { Command } from "commander"
 import genDiff from '../src/index.js'
 import stylish from "../src/formatters/stylish.js"
 import plain from '../src/formatters/plain.js'
+import json from '../src/formatters/json.js'
 
-const formats = { stylish, plain }
+const formats = { stylish, plain, json }
 
 const program = new Command()
 
