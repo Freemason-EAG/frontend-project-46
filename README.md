@@ -30,7 +30,7 @@ gendiff <path_to_first_file> <path_to_second_file> [--format <format>]
 | Options | Description |
 |---------|-------------|
 | `-V, --version` | output the version number |
-| `-f, --format [type]` | output format (default: "stylish") |
+| `-f, --format [type]` | output format (*default: "stylish"*) |
 | `-h, --help` | display help for command |
  
 
