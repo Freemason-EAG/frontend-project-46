@@ -49,7 +49,7 @@ const genDiff = (filepath1, filepath2, format = 'stylish') => {
   const bothContentKeys = _.sortBy(_.union(Object.keys(content1), Object.keys(content2)))
   const convertToAst = getAST(content1, content2, bothContentKeys)
 
-  const inputFormat = (typeof format === 'function') ? format : formats[format] || stylish
+  const inputFormat = formats[format] || stylish
 
   const structured = inputFormat(convertToAst)
   return structured
