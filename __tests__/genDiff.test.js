@@ -149,7 +149,7 @@ describe('genDiff: Plain format check', () => {
   })
 
   test('genDiff', () => {
-    expect(genDiff(firstJsonFile, secondJsonFile, plain)).toEqual(
+    expect(genDiff(firstJsonFile, secondJsonFile, 'plain')).toEqual(
       `Property 'common.follow' was added with value: false
 Property 'common.setting2' was removed
 Property 'common.setting3' was updated. From true to null
@@ -183,7 +183,7 @@ describe('genDiff: JSON format check', () => {
   })
 
   test('genDiff', () => {
-    expect(genDiff(firstJsonFile, secondJsonFile, json)).toEqual(
+    expect(genDiff(firstJsonFile, secondJsonFile, 'json')).toEqual(
       `[
   {
     "key": "common",
