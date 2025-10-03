@@ -19,8 +19,7 @@ program
 .argument('<filepath2>')
 .action((a, b) => {
     const selectedFormat = program.opts().format || 'stylish'
-    const format = formats[selectedFormat] || stylish
-    console.log(genDiff(a, b, format))
+    console.log(genDiff(a, b, selectedFormat))
 })
 
 program.parse()

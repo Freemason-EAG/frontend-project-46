@@ -33,7 +33,7 @@ const getAST = (obj1, obj2, arrKeys) => {
   })
 }
 
-const genDiff = (filepath1, filepath2, format = stylish) => {
+const genDiff = (filepath1, filepath2, format = 'stylish') => {
   const path1 = path.resolve(filepath1)
   const path2 = path.resolve(filepath2)
 
