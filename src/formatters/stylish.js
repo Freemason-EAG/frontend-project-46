@@ -13,10 +13,10 @@ const stylish = (arrOfObjs) => {
   const iter = (objs, depth = 0) => {
     const nextSpace = makeIndent(depth + 1, 2)
     return objs.flatMap((obj) => {
-      if (obj.status === 'added') return `${nextSpace}+ ${obj.key}: ${stringify(obj.value, depth + 1)}`
-      if (obj.status === 'deleted') return `${nextSpace}- ${obj.key}: ${stringify(obj.value, depth + 1)}`
+      if (obj.status === 'added') return [`${nextSpace}+ ${obj.key}: ${stringify(obj.value, depth + 1)}`]
+      if (obj.status === 'deleted') return [`${nextSpace}- ${obj.key}: ${stringify(obj.value, depth + 1)}`]
       if (obj.status === 'changed') return [`${nextSpace}- ${obj.key}: ${stringify(obj.value1, depth + 1)}`, `${nextSpace}+ ${obj.key}: ${stringify(obj.value2, depth + 1)}`]
-      if (obj.status === 'unchanged') return `${nextSpace}  ${obj.key}: ${stringify(obj.value, depth + 1)}`
+      if (obj.status === 'unchanged') return [`${nextSpace}  ${obj.key}: ${stringify(obj.value, depth + 1)}`]
       if (obj.status === 'recursion') {
         return [`${nextSpace}  ${obj.key}: {`, ...iter (obj.children, depth + 1), `${nextSpace}  }`]
       }
