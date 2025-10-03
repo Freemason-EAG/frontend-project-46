@@ -1,10 +1,9 @@
 ## Gendiff
 
-### Tests and linter status:
 [![Actions Status](https://github.com/Freemason-EAG/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Freemason-EAG/frontend-project-46/actions) [![my-project-ci](https://github.com/Freemason-EAG/frontend-project-46/actions/workflows/my-project-ci.yml/badge.svg)](https://github.com/Freemason-EAG/frontend-project-46/actions/workflows/my-project-ci.yml) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Freemason-EAG_frontend-project-46&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Freemason-EAG_frontend-project-46) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Freemason-EAG_frontend-project-46&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Freemason-EAG_frontend-project-46)
 
 
-Gendiff — a utility for comparing two configuration files and displaying their differences.
+**Gendiff** — a utility for comparing two configuration files and displaying their differences.
 
 ### Supported formats
 
@@ -19,7 +18,7 @@ Gendiff — a utility for comparing two configuration files and displaying their
 
 ### Installation
 ```bash
-git clone (https://github.com/Freemason-EAG/frontend-project-46)
+git clone https://github.com/Freemason-EAG/frontend-project-46
 cd frontend-project-46
 npm install
 npm link
@@ -28,6 +27,11 @@ npm link
 ## How to use
 
 gendiff <path_to_first_file> <path_to_second_file> [--format <format>]
+
+Options:
+  -V, --version        output the version number
+  -f, --format [type]  output format (default: "stylish")
+  -h, --help           display help for command
  
 
 ### Demo 
