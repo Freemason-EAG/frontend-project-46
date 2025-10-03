@@ -31,7 +31,7 @@ const plain = (arrOfObjs) => {
         return iter(obj.children, newParents)
       }
     })
-    return transformToPlain.filter(Boolean)
+    return transformToPlain.filter(Boolean) // убираем undefined
   }
   return `${iter(arrOfObjs, '').join('\n')}`
 }

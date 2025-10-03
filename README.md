@@ -1,7 +1,33 @@
+## Gendiff
+
 ### Tests and linter status:
-| Test & CI | Code Quality |
-|-----------|--------------|
-| [![Actions Status](https://github.com/Freemason-EAG/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Freemason-EAG/frontend-project-46/actions) [![my-project-ci](https://github.com/Freemason-EAG/frontend-project-46/actions/workflows/my-project-ci.yml/badge.svg)](https://github.com/Freemason-EAG/frontend-project-46/actions/workflows/my-project-ci.yml) |  [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Freemason-EAG_frontend-project-46&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Freemason-EAG_frontend-project-46) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Freemason-EAG_frontend-project-46&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Freemason-EAG_frontend-project-46) |
+[![Actions Status](https://github.com/Freemason-EAG/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Freemason-EAG/frontend-project-46/actions) [![my-project-ci](https://github.com/Freemason-EAG/frontend-project-46/actions/workflows/my-project-ci.yml/badge.svg)](https://github.com/Freemason-EAG/frontend-project-46/actions/workflows/my-project-ci.yml) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Freemason-EAG_frontend-project-46&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Freemason-EAG_frontend-project-46) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Freemason-EAG_frontend-project-46&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Freemason-EAG_frontend-project-46)
+
+
+Gendiff — a utility for comparing two configuration files and displaying their differences.
+
+### Supported formats
+
+- JSON
+- YAML
+
+### Output formats
+
+- stylish (default)
+- plain
+- json
+
+### Installation
+```bash
+git clone (https://github.com/Freemason-EAG/frontend-project-46)
+cd frontend-project-46
+npm install
+npm link
+```
+
+## How to use
+
+gendiff <path_to_first_file> <path_to_second_file> [--format <format>]
  
 
 ### Demo 
