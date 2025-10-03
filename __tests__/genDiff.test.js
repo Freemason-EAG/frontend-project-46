@@ -1,8 +1,6 @@
 import genDiff from '../src/index.js'
 import { fileURLToPath } from 'url'
 import path from 'path'
-import plain from '../src/formatters/plain.js'
-import json from '../src/formatters/json.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
