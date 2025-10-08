@@ -12,9 +12,9 @@ program
   .option('-f, --format [type]', 'output format', 'stylish')
   .argument('<filepath1>')
   .argument('<filepath2>')
-  .action((a, b) => {
-    const selectedFormat = program.opts().format || 'stylish'
-    console.log(genDiff(a, b, selectedFormat))
+  .action((filepath1, filepath2, opts) => {
+    const selectedFormat = opts.format || 'stylish'
+    console.log(genDiff(filepath1, filepath2, selectedFormat))
   })
 
 program.parse()
