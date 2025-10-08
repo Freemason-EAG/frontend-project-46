@@ -2,36 +2,12 @@ import path from 'node:path'
 import fs from 'node:fs'
 import _ from 'lodash'
 import parser from './parser.js'
+import getAST from './AST-constructor.js'
 import stylish from './formatters/stylish.js'
 import plain from './formatters/plain.js'
 import json from './formatters/json.js'
 
 const formats = { stylish, plain, json }
-
-const getAST = (obj1, obj2, arrKeys) => {
-  return arrKeys.map((key) => {
-    const inFirstObj = Object.hasOwn(obj1, key)
-    const inSecondObj = Object.hasOwn(obj2, key)
-    const val1 = obj1[key]
-    const val2 = obj2[key]
-    if (inFirstObj && inSecondObj) {
-      if (typeof (val1) === 'object' && typeof (val2) === 'object') {
-        const bothContentKeys = _.sortBy(_.union(Object.keys(val1), Object.keys(val2)))
-        return { key, status: 'recursion', children: getAST(val1, val2, bothContentKeys) }
-      }
-      else if ((val1 === val2)) return { key, status: 'unchanged', value: val1 }
-
-      else return { key, status: 'changed', value1: val1, value2: val2 }
-    }
-    else if (inFirstObj && !inSecondObj) {
-      return { key, status: 'deleted', value: val1 }
-    }
-    else if (inSecondObj && !inFirstObj) {
-      return { key, status: 'added', value: val2 }
-    }
-    return null
-  })
-}
 
 const genDiff = (filepath1, filepath2, format = 'stylish') => {
   const path1 = path.resolve(filepath1)
