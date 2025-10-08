@@ -3,11 +3,7 @@ import fs from 'node:fs'
 import _ from 'lodash'
 import parser from './parser.js'
 import getAST from './AST-constructor.js'
-import stylish from './formatters/stylish.js'
-import plain from './formatters/plain.js'
-import json from './formatters/json.js'
-
-const formats = { stylish, plain, json }
+import getFormat from './formatters/index.js'
 
 const genDiff = (filepath1, filepath2, format = 'stylish') => {
   const path1 = path.resolve(filepath1)
@@ -25,10 +21,9 @@ const genDiff = (filepath1, filepath2, format = 'stylish') => {
   const bothContentKeys = _.sortBy(_.union(Object.keys(content1), Object.keys(content2)))
   const convertToAst = getAST(content1, content2, bothContentKeys)
 
-  const inputFormat = formats[format] || stylish
+  const formatter = getFormat(format)
 
-  const structured = inputFormat(convertToAst)
-  return structured
+  return formatter(convertToAst)
 }
 
 export default genDiff
