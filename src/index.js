@@ -5,16 +5,18 @@ import parser from './parser.js'
 import getAST from './AST-constructor.js'
 import getFormat from './formatters/index.js'
 
-const genDiff = (filepath1, filepath2, format = 'stylish') => {
-  const path1 = path.resolve(filepath1)
-  const path2 = path.resolve(filepath2)
-
-  const data1 = fs.readFileSync(path1, 'utf-8')
-  const data2 = fs.readFileSync(path2, 'utf-8')
-
-  if (data1.trim().length === 0 || data2.trim().length === 0) {
-    throw new Error('empty file transferred')
+const fileReader = (filepath) => {
+  const data = fs.readFileSync(path.resolve(filepath), 'utf-8')
+  if (data.trim().length === 0) {
+    throw new Error(`empty file transferred`)
   }
+  return data
+}
+
+const genDiff = (filepath1, filepath2, format = 'stylish') => {
+  const data1 = fileReader(filepath1)
+  const data2 = fileReader(filepath2)
+
   const content1 = parser(data1, filepath1)
   const content2 = parser(data2, filepath2)
 
