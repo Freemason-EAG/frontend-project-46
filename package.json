@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
-  "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/Freemason-EAG/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Freemason-EAG/frontend-project-46/actions)",
+  "version": "0.1.0",
+  "description": "utility for comparing two configuration files and displaying their differences",
   "main": "src/index.js",
   "engines": {
     "node": ">=18"
